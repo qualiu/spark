@@ -19,4 +19,9 @@ rem
 
 set SPARK_HOME=%~dp0..
 set _SPARK_CMD_USAGE=Usage: ./bin/run-example [options] example-class [example args]
-cmd /V /E /C "%~dp0spark-submit.cmd" run-example %*
+echo "%~dp0spark-submit.cmd"|findstr /C:" "
+if %ERRORLEVEL% EQU 0 (
+    cmd /V /E /C "%~dp0spark-submit.cmd" run-example %*
+) else (
+    cmd /V /E /C %~dp0spark-submit.cmd run-example %*
+)

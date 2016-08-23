@@ -17,4 +17,9 @@ rem See the License for the specific language governing permissions and
 rem limitations under the License.
 rem
 
-cmd /V /E /C "%~dp0spark-class.cmd" org.apache.hive.beeline.BeeLine %*
+echo "%~dp0spark-class.cmd"|findstr /C:" "
+if %ERRORLEVEL% EQU 0 (
+    cmd /V /E /C "%~dp0spark-class.cmd" org.apache.hive.beeline.BeeLine %*
+) else (
+    cmd /V /E /C %~dp0spark-class.cmd org.apache.hive.beeline.BeeLine %*
+)
